@@ -38,7 +38,7 @@ install(FILES
 
 	DESTINATION libexec/darling/usr/share/man/man1
 )
-InstallSymlink(ncal.1 libexec/darling/usr/share/man/man1/cal.1)
+InstallSymlink(ncal.1 ${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/share/man/man1/cal.1)
 
 install(DIRECTORY calendar/calendars/ DESTINATION libexec/darling/usr/share/calendar)
 # Not sure why the empty folders, but Apple does it as of misc_cmds-33, so we do it too
