@@ -17,16 +17,26 @@ add_darling_executable(calendar
 	gen/calendar_vers.c
 )
 target_include_directories(calendar PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/calendar)
-#add_darling_executable(leave leave/leave.c gen/leave_vers.c) currently having strange type issues
+
+add_darling_executable(leave leave/leave.c gen/leave_vers.c)
+target_compile_definitions(leave PRIVATE
+	"u_int=unsigned int"
+)
+
 add_darling_executable(ncal ncal/ncal.c ncal/calendar.c ncal/easter.c gen/ncal_vers.c)
 target_include_directories(ncal PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/ncal)
+target_link_libraries(ncal ncurses)
+
 add_darling_executable(cal ncal/ncal.c ncal/calendar.c ncal/easter.c gen/ncal_vers.c)
 target_include_directories(cal PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/ncal)
+target_link_libraries(cal ncurses)
+
 add_darling_executable(tsort tsort/tsort.c gen/tsort_vers.c)
+
 add_darling_executable(units units/units.c gen/units_vers.c)
 target_include_directories(units PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/units)
 
-install(TARGETS calendar ncal cal tsort units #leave
+install(TARGETS calendar ncal cal tsort units leave
 	DESTINATION libexec/darling/usr/bin)
 
 install(FILES
